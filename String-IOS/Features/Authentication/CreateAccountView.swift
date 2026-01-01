@@ -28,14 +28,16 @@ struct CreateAccountView: View {
             )
             .animation(.easeInOut, value: animate)
             
-            Text("Create an account")
-                .stingerBoldFont(size: 28)
-                .opacity(animate ? 1 : 0)
-                .scaleEffect(animate ? 1 : 0.7)
-                .animation(.easeInOut.delay(0.4), value: animate)
-                .offset(
-                    y: UIScreen.main.bounds.height * -0.25
-                )
+            VStack {
+                Text("Create an account")
+                    .stingerBoldFont(size: 28)
+                    .opacity(animate ? 1 : 0)
+                    .scaleEffect(animate ? 1 : 0.7)
+                    .animation(.easeInOut.delay(0.4), value: animate)
+                
+                Spacer()
+            }
+            .padding(.top, UIScreen.main.bounds.height * 0.1)
             
             
             VStack(spacing: 20) {
