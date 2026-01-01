@@ -12,6 +12,10 @@ enum AuthRoute: Hashable {
     case createAccountView
     case signInView
     case signUpView
+    case username
+    case gender
+    case birthday
+    case photos
 }
 
 struct AuthenticationView: View {
@@ -27,6 +31,10 @@ struct AuthenticationView: View {
                     case .createAccountView: CreateAccountView(path: $path)
                     case .signInView: SignInView(path: $path)
                     case .signUpView: SignUpView(path: $path)
+                    case .username: UsernameView(path: $path)
+                    case .gender: GenderView(path: $path)
+                    case .birthday: BirthdayView(path: $path)
+                    case .photos: PhotosView(path: $path)
                     }
                 }
         }

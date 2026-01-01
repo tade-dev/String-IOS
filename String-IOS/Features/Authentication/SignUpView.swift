@@ -80,7 +80,7 @@ struct SignUpView: View {
                     
                     PrimaryBtn(
                         onButtonPressed: {
-                            path.append(AuthRoute.signUpView)
+                            path.append(AuthRoute.username)
                         },
                         buttonLabel: "Sign up",
                     )
