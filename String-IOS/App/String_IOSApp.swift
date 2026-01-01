@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct String_IOSApp: App {
+    
+    @StateObject private var rootViewModel = RootViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(rootViewModel)
         }
     }
 }
