@@ -11,6 +11,7 @@ struct SignUpView: View {
     
     @Binding var path: NavigationPath
     @State private var animate: Bool = false
+    @State private var text: String = ""
     
     var body: some View {
         ZStack {
@@ -43,6 +44,7 @@ struct SignUpView: View {
                         .animation(.easeInOut.delay(0.4), value: animate)
                     
                     InputField(
+                        text: $text,
                         placeholder: "Email",
                         prefixIcon: Image(.message)
                     )
@@ -51,6 +53,7 @@ struct SignUpView: View {
                     .scaleEffect(animate ? 1 : 0.7)
                     .animation(.easeInOut.delay(0.5), value: animate)
                     InputField(
+                        text: $text,
                         placeholder: "Password",
                         isPasswordField: true,
                         prefixIcon: Image(.passwordLock),

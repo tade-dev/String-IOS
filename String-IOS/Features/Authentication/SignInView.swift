@@ -11,6 +11,8 @@ struct SignInView: View {
     
     @Binding var path: NavigationPath
     @State private var animate: Bool = false
+    @State private var text: String = ""
+    @State private var rememberMe: Bool = false
     
     var body: some View {
         ZStack {
@@ -43,6 +45,7 @@ struct SignInView: View {
                         .animation(.easeInOut.delay(0.4), value: animate)
                     
                     InputField(
+                        text: $text, 
                         placeholder: "Email",
                         prefixIcon: Image(.message)
                     )
@@ -51,6 +54,7 @@ struct SignInView: View {
                     .scaleEffect(animate ? 1 : 0.7)
                     .animation(.easeInOut.delay(0.5), value: animate)
                     InputField(
+                        text: $text,
                         placeholder: "Password",
                         isPasswordField: true,
                         prefixIcon: Image(.passwordLock),
@@ -61,11 +65,13 @@ struct SignInView: View {
                     .animation(.easeInOut.delay(0.6), value: animate)
                     
                     HStack {
-                        Text("Remember me")
-                            .stingerRegularFont(size: 12)
-                            .onTapGesture {
-                                
-                            }
+                        RememberMe(
+                            isOn: $rememberMe,
+                        )
+                        .onTapGesture {
+                            rememberMe.toggle()
+                        }
+                        
                         Spacer()
                         Text("Forgot password?")
                             .stingerRegularFont(size: 12)
@@ -74,6 +80,9 @@ struct SignInView: View {
                             }
                     }
                     .padding(.top, 15)
+                    .opacity(animate ? 1 : 0)
+                    .scaleEffect(animate ? 1 : 0.7)
+                    .animation(.easeInOut.delay(0.65), value: animate)
                     
                 })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -174,6 +183,38 @@ struct SignInView: View {
             .onTapGesture {
                 
             }
+    }
+}
+
+struct RememberMe: View {
+    @Binding var isOn: Bool
+    @Namespace private var namespace
+    var body: some View {
+        HStack {
+
+            Group {
+                if isOn {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(.accent)
+                        .frame(width: 17, height: 17)
+                        .overlay {
+                            Image(systemName: "checkmark")
+                                .foregroundStyle(.white)
+                        }
+                        .matchedGeometryEffect(id: "checkbox", in: namespace)
+                } else {
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(lineWidth: 2)
+                        .fill(.black)
+                        .frame(width: 17, height: 17)
+                        .matchedGeometryEffect(id: "checkbox", in: namespace)
+                }
+            }
+            .animation(.easeInOut, value: isOn)
+                
+            Text("Remember me")
+                .stingerRegularFont(size: 12)
+        }
     }
 }
 

@@ -16,6 +16,7 @@ enum AuthRoute: Hashable {
     case gender
     case birthday
     case photos
+    case verifyImageView(image: UIImage)
 }
 
 struct AuthenticationView: View {
@@ -35,6 +36,7 @@ struct AuthenticationView: View {
                     case .gender: GenderView(path: $path)
                     case .birthday: BirthdayView(path: $path)
                     case .photos: PhotosView(path: $path)
+                    case .verifyImageView(let image): VerifyImageView(path: $path, image: image)
                     }
                 }
         }

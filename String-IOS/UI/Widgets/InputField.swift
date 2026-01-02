@@ -9,12 +9,13 @@ import SwiftUI
 
 struct InputField: View {
     
-    @State var text: String = ""
+    @Binding var text: String
     var placeholder: String = "Active Neno"
     var isPasswordField: Bool = false
     @FocusState private var isFocused: Bool
     var prefixIcon: Image?
     var suffixIcon: Image?
+    var textStyle: String = AppConstants.regularFontName
     
     var body: some View {
             
@@ -35,11 +36,11 @@ struct InputField: View {
                         TextField("", text: $text)
                     }
                 })
-                .stingerRegularFont(size: 14)
+                .font(.custom(textStyle, size: 14))
                 .foregroundStyle(.black)
                 .focused($isFocused)
                 
-                if !isFocused {
+                if (!isFocused && text.isEmpty) {
                     Text(placeholder)
                         .stingerRegularFont(size: 14)
                         .foregroundStyle(.gray.opacity(0.8))
@@ -68,5 +69,7 @@ struct InputField: View {
 }
 
 #Preview {
-    InputField()
+    InputField(
+        text: .constant("")
+    )
 }
