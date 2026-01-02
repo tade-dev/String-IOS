@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1EFDF01B2F08024100C7492A /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1EFDF01A2F08024100C7492A /* SwiftfulUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1E439E612F009F3F0060FD97 /* String-IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "String-IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EFDF01B2F08024100C7492A /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "String-IOS";
 			packageProductDependencies = (
+				1EFDF01A2F08024100C7492A /* SwiftfulUI */,
 			);
 			productName = "String-IOS";
 			productReference = 1E439E612F009F3F0060FD97 /* String-IOS.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 1E439E582F009F3F0060FD97;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1EFDF0192F08024100C7492A /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1E439E622F009F3F0060FD97 /* Products */;
 			projectDirPath = "";
@@ -368,6 +377,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EFDF0192F08024100C7492A /* XCRemoteSwiftPackageReference "SwiftfulUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1EFDF01A2F08024100C7492A /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EFDF0192F08024100C7492A /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1E439E592F009F3F0060FD97 /* Project object */;
 }

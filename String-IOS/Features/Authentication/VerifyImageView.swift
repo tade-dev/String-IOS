@@ -15,6 +15,7 @@ struct VerifyImageView: View {
     @State private var showPictureSelectionSheet: Bool = false
     @State private var text: String = ""
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var rootViewModel: RootViewModel
     
     var body: some View {
         ZStack {
@@ -96,7 +97,7 @@ struct VerifyImageView: View {
                     
                     PrimaryBtn(
                         onButtonPressed: {
-                            
+                            rootViewModel.appState = .main
                         },
                         buttonLabel: "Continue"
                     )
@@ -120,4 +121,5 @@ struct VerifyImageView: View {
         path: .constant(NavigationPath()),
         image: UIImage()
     )
+    .environmentObject(RootViewModel())
 }

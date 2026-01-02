@@ -13,6 +13,7 @@ struct SignInView: View {
     @State private var animate: Bool = false
     @State private var text: String = ""
     @State private var rememberMe: Bool = false
+    @EnvironmentObject private var rootViewModel: RootViewModel
     
     var body: some View {
         ZStack {
@@ -104,7 +105,7 @@ struct SignInView: View {
                     
                     PrimaryBtn(
                         onButtonPressed: {
-                            path.append(AuthRoute.signUpView)
+                            rootViewModel.appState = .main
                         },
                         buttonLabel: "Sign in",
                     )
@@ -222,4 +223,5 @@ struct RememberMe: View {
     SignInView(
         path: .constant(NavigationPath())
     )
+    .environmentObject(RootViewModel())
 }
