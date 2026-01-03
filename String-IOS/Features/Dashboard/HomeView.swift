@@ -7,64 +7,51 @@
 
 import SwiftUI
 
-enum HomeRoute: Hashable {
+enum HomeRoute: Hashable, Equatable {
     case home
+    case details(user: CardData)
     case premium
 }
 
 struct HomeView: View {
     
     @State private var path = NavigationPath()
+    @EnvironmentObject private var homeViewModel: HomeViewModel
+    @Namespace private var namespace
     
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack {
+        ZStack {
+            HomeBackground()
+            
+            VStack {
+                header
                 
-                HomeBackground()
+                Spacer()
                 
-                VStack {
-                    
-                    header
-                    
-                    Spacer()
-                    SwipeableCards()
-                    Spacer()
-                    
-                    HStack(spacing: 15) {
-                        ActionButtons(
-                            image: Image(.close),
-                            size: 33,
-                            onTap: {
-                                
-                            }
-                        )
-                        ActionButtons(
-                            image: Image(.message2),
-                            size: 55,
-                            onTap: {
-                                
-                            }
-                        )
-                        ActionButtons(
-                            image: Image(.like),
-                            size: 33,
-                            onTap: {
-                                
-                            }
-                        )
-                    }
-                    .padding(.bottom, 20)
-                    
+                SwipeableCards(namespace: namespace)
+                
+                Spacer()
+                
+                HStack(spacing: 15) {
+                    ActionButtons(image: Image(.close), size: 33, onTap: {})
+                    ActionButtons(image: Image(.message2), size: 55, onTap: {})
+                    ActionButtons(image: Image(.like), size: 33, onTap: {})
                 }
-                .padding(.horizontal, 20)
-                .frame(maxWidth: UIScreen.main.bounds.width)
-                
+                .padding(.bottom, 20)
             }
-            .navigationDestination(for: HomeRoute.self) { route in
-                switch route {
-                case .home: HomeView()
-                case .premium: PremiumView()
-                }
+            .padding(.horizontal, 20)
+            .frame(maxWidth: UIScreen.main.bounds.width)
+            
+            if let selectedUser = homeViewModel.selectedUser {
+                UserDetailsOverlay(
+                    user: selectedUser,
+                    namespace: namespace,
+                    onDismiss: {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                            homeViewModel.selectedUser = nil
+                        }
+                    }
+                )
             }
         }
     }
@@ -76,10 +63,7 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 47, height: 47)
                     .clipShape(.circle)
-                    .overlay {
-                        Circle()
-                            .stroke(.white)
-                    }
+                    .overlay { Circle().stroke(.white) }
                 Text("Hi,👋 Andrew")
                     .stingerBoldFont(size: 18)
                     .foregroundStyle(.white)
@@ -93,7 +77,6 @@ struct HomeView: View {
         }
         .padding(.top, 10)
     }
-    
 }
 
 struct ActionButtons: View {
@@ -118,4 +101,5 @@ struct ActionButtons: View {
 
 #Preview {
     HomeView()
+        .environmentObject(HomeViewModel())
 }

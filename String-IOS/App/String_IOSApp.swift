@@ -11,11 +11,13 @@ import SwiftUI
 struct String_IOSApp: App {
     
     @StateObject private var rootViewModel = RootViewModel()
+    @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(rootViewModel)
+                .environmentObject(homeViewModel)
         }
     }
 }

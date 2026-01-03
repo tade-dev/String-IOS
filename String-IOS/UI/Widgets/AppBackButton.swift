@@ -13,6 +13,7 @@ struct AppBackButton: View {
     
     var body: some View {
         Image(.backButton)
+            .renderingMode(.template)
             .onTapGesture {
                 onTap()
             }
