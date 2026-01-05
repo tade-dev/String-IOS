@@ -15,6 +15,8 @@ struct InputField: View {
     @FocusState private var isFocused: Bool
     var prefixIcon: Image?
     var suffixIcon: Image?
+    var radius: CGFloat = 50
+    var height: CGFloat = 56
     var textStyle: String = AppConstants.regularFontName
     
     var body: some View {
@@ -58,9 +60,9 @@ struct InputField: View {
         }
         .padding(.leading, 20)
         .frame(maxWidth: .infinity)
-        .frame(height: 56)
+        .frame(height: height)
         .background {
-            RoundedRectangle(cornerRadius: 45)
+            RoundedRectangle(cornerRadius: radius)
                 .stroke(.black)
         }
         

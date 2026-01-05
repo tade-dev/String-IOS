@@ -9,22 +9,25 @@ import SwiftUI
 
 
 struct BlurredCircleBg: View {
+    
+    var radius: CGFloat?
+    
     var body: some View {
         
         ZStack {
-            BlurredCircle()
+            BlurredCircle(radius: radius ?? 90)
                 .offset(
                     x: UIScreen.main.bounds.width * -0.5,
                     y: UIScreen.main.bounds.height * -0.5
                 )
             
-            BlurredCircle()
+            BlurredCircle(radius: radius ?? 90)
                 .offset(
                     x: UIScreen.main.bounds.width * -0.5,
                     y: UIScreen.main.bounds.height * 0.5
                 )
             
-            BlurredCircle(radius: 120)
+            BlurredCircle(radius: radius ?? 90)
                 .offset(
                     x: UIScreen.main.bounds.width * 0.5,
                     y: UIScreen.main.bounds.height * 0

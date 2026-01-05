@@ -16,6 +16,7 @@ struct UserDetailsOverlay: View {
     @State private var backgroundOpacity: Double = 1.0
     @State private var scrollOffset: CGFloat = 0
     
+    
     var body: some View {
         ZStack(alignment: .top) {
             // Black background

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeBackground: View {
+    
+    var showBlurredCircle: Bool = false
+    
     var body: some View {
         ZStack {
             
@@ -26,13 +29,15 @@ struct HomeBackground: View {
                     y: UIScreen.main.bounds.height * 0.25
                 )
             
-            BlurredCircle(
-                radius: 120
-            )
-                .offset(
-                    x: UIScreen.main.bounds.width * -0.5,
-                    y: UIScreen.main.bounds.height * -0.5
+            if showBlurredCircle {
+                BlurredCircle(
+                    radius: 120
                 )
+                    .offset(
+                        x: UIScreen.main.bounds.width * -0.5,
+                        y: UIScreen.main.bounds.height * -0.5
+                    )
+            }
             
         }
     }

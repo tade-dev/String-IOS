@@ -29,6 +29,8 @@ struct OnboardingCardDeck: View {
                 ForEach(cards.indices, id: \.self) { cardIndex in
                     cardView(for: cardIndex, geo: geo)
                 }
+                
+                
             }
             .frame(maxWidth: .infinity)
             .gesture(dragGesture)

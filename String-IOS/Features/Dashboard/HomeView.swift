@@ -9,7 +9,6 @@ import SwiftUI
 
 enum HomeRoute: Hashable, Equatable {
     case home
-    case details(user: CardData)
     case premium
 }
 
@@ -20,38 +19,46 @@ struct HomeView: View {
     @Namespace private var namespace
     
     var body: some View {
-        ZStack {
-            HomeBackground()
-            
-            VStack {
-                header
+        NavigationStack(path: $path) {
+            ZStack {
+                HomeBackground(showBlurredCircle: true)
                 
-                Spacer()
-                
-                SwipeableCards(namespace: namespace)
-                
-                Spacer()
-                
-                HStack(spacing: 15) {
-                    ActionButtons(image: Image(.close), size: 33, onTap: {})
-                    ActionButtons(image: Image(.message2), size: 55, onTap: {})
-                    ActionButtons(image: Image(.like), size: 33, onTap: {})
-                }
-                .padding(.bottom, 20)
-            }
-            .padding(.horizontal, 20)
-            .frame(maxWidth: UIScreen.main.bounds.width)
-            
-            if let selectedUser = homeViewModel.selectedUser {
-                UserDetailsOverlay(
-                    user: selectedUser,
-                    namespace: namespace,
-                    onDismiss: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
-                            homeViewModel.selectedUser = nil
-                        }
+                VStack {
+                    header
+                    
+                    Spacer()
+                    
+                    SwipeableCards(namespace: namespace)
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 15) {
+                        ActionButtons(image: Image(.close), size: 33, onTap: {})
+                        ActionButtons(image: Image(.message2), size: 55, onTap: {})
+                        ActionButtons(image: Image(.like), size: 33, onTap: {})
                     }
-                )
+                    .padding(.bottom, 20)
+                }
+                .padding(.horizontal, 20)
+                .frame(maxWidth: UIScreen.main.bounds.width)
+                
+                if let selectedUser = homeViewModel.selectedUser {
+                    UserDetailsOverlay(
+                        user: selectedUser,
+                        namespace: namespace,
+                        onDismiss: {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                                homeViewModel.selectedUser = nil
+                            }
+                        }
+                    )
+                }
+            }
+            .navigationDestination(for: HomeRoute.self) { route in
+                switch route {
+                case .home: HomeView()
+                case .premium: PremiumView()
+                }
             }
         }
     }
@@ -74,6 +81,18 @@ struct HomeView: View {
             Image(.like)
                 .resizable()
                 .frame(width: 32, height: 27.5)
+                .frame(width: 38, height: 38)
+                .onTapGesture {
+                    path.append(HomeRoute.premium)
+                }
+                .overlay(alignment: .topTrailing) {
+                    Text("12")
+                        .foregroundStyle(.white)
+                        .font(.system(size: 12, weight: .semibold))
+                        .padding(.all, 3)
+                        .background(.black)
+                        .clipShape(.circle)
+                }
         }
         .padding(.top, 10)
     }
