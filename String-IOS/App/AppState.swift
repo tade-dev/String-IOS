@@ -10,3 +10,5 @@ import SwiftUI
 enum AppState: Hashable {
     case splash, onboarding, authentication, main
 }
+
+
