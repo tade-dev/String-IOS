@@ -1,7 +1,7 @@
 # String 💛
 
 <p align="center">
-  <img src="icon.png" alt="String App Icon" width="200"/>
+  <img src="https://raw.githubusercontent.com/tade-dev/String-IOS/main/String-IOS/Resources/Assets.xcassets/Image/AppIcon.imageset/Image.png" alt="String App Icon" width="200" />
 </p>
 
 <p align="center">
