@@ -41,6 +41,23 @@ struct PrimaryBorderedButtonStyle: ButtonStyle {
     }
 }
 
+struct SwipeButtonStyle: ButtonStyle {
+    
+    let size: CGFloat
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: size, height: size)
+            .padding(.all, 20)
+            .overlay {
+                Circle()
+                    .stroke(.white)
+            }
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .opacity(configuration.isPressed ? 0.9 : 1.0)
+    }
+}
+
 struct PrimaryButtonModifier: ViewModifier {
     let buttonColor: Color
     let labelColor: Color
@@ -57,11 +74,9 @@ struct PrimaryBorderedButtonModifier: ViewModifier {
     }
 }
 
-extension View {
-    func primaryButtonStyle(buttonColor: Color = .accentColor, labelColor: Color = .white) -> some View {
-        self.modifier(PrimaryButtonModifier(buttonColor: buttonColor, labelColor: labelColor))
-    }
-    func primaryBorderedButtonStyle(buttonColor: Color = .accentColor, labelColor: Color = .white) -> some View {
-        self.modifier(PrimaryBorderedButtonModifier(borderColor: buttonColor, labelColor: labelColor))
+struct SwipeButtonModifier: ViewModifier {
+    let size: CGFloat
+    func body(content: Content) -> some View {
+        content.buttonStyle(SwipeButtonStyle(size: size))
     }
 }

@@ -33,9 +33,16 @@ struct HomeView: View {
                     Spacer()
                     
                     HStack(spacing: 15) {
-                        ActionButtons(image: Image(.close), size: 33, onTap: {})
+                        ActionButtons(image: Image(.close), size: 33, onTap: {
+                            homeViewModel.swipeCard(direction: .left)
+                        })
                         ActionButtons(image: Image(.message2), size: 55, onTap: {})
-                        ActionButtons(image: Image(.like), size: 33, onTap: {})
+                        ActionButtons(image: Image(.like), size: 33, onTap: {
+                            withAnimation(.easeInOut) {
+                                homeViewModel.showMatchedScreen = true
+                            }
+                            homeViewModel.swipeCard(direction: .right)
+                        })
                     }
                     .padding(.bottom, 20)
                 }
@@ -53,6 +60,7 @@ struct HomeView: View {
                         }
                     )
                 }
+                
             }
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
@@ -105,16 +113,15 @@ struct ActionButtons: View {
     let onTap: ()-> Void
     
     var body: some View {
-        image
-            .frame(width: size, height: size)
-            .padding(.all, 20)
-            .overlay {
-                Circle()
-                    .stroke(.white)
-            }
-            .onTapGesture {
-                onTap()
-            }
+        
+        Button {
+            onTap()
+        } label: {
+            image
+        }
+        .swipeButtonStyle(size: size)
+
+            
     }
 }
 
