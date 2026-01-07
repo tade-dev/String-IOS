@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Gesture-Driven UI & Animation Exploration in SwiftUI</strong>
+  <strong>Date Matching App Exploration in SwiftUI</strong>
 </p>
 
 <p align="center">
